@@ -23,21 +23,51 @@ Agent Anchor keeps your OpenClaw agent running smoothly — even through crashes
 ## Quick Install
 
 ```bash
-cd ~/.openclaw/workspace
-mkdir -p agent-anchor
-cd agent-anchor
+cd ~/.openclaw/skills
+openclaw skills list
+# Find "agent-anchor" and note the source path
 # Then serve the dashboard:
+cd ~/.openclaw/skills/agent-anchor
 python3 -m http.server 3456
 ```
 
 Then open http://localhost:3456
 
-## Setup
+## Auto-Sync Setup (For Your Agent)
 
-1. Copy the `agent-anchor/` folder to your OpenClaw workspace
-2. Run `python3 -m http.server 3456` in the folder
-3. Open http://localhost:3456
-4. The dashboard will start tracking state automatically
+Add this to your heartbeat to keep the dashboard live:
+
+```python
+import json, os
+from datetime import datetime, timezone
+
+STATE = os.path.expanduser("~/.openclaw/skills/agent-anchor/state-anchor.json")
+
+def sync_state():
+    now = datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
+    if os.path.exists(STATE):
+        with open(STATE) as f: s = json.load(f)
+    else:
+        s = {'tasks':{},'cronJobs':[],'auditLog':[],'systemLog':[]}
+    s['lastUpdated'] = now
+    s['syncMeta'] = {'lastSync': now, 'syncInterval': '3min', 'source': 'heartbeat'}
+    t = datetime.now(timezone.utc).strftime('%I:%M %p')
+    s.setdefault('auditLog', []).append({'time': f'5/9/2026, {t}', 'action': 'Heartbeat sync', 'tag': 'done'})
+    s['auditLog'] = s['auditLog'][-20:]
+    with open(STATE, 'w') as f: json.dump(s, f, indent=2)
+```
+
+Call `sync_state()` on every heartbeat poll.
+
+## What Shows on the Dashboard
+
+When your agent syncs, the dashboard shows:
+- **Tasks** — In Progress, Staged, Completed (from heartbeat context)
+- **Cron Jobs** — All scheduled jobs with status
+- **Calendar** — History of everything your agent did
+- **Terminal** — Live status messages
+
+The dashboard polls `state-anchor.json` every 10 seconds — no extra setup needed.
 
 ## Customization
 
