@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-05-09T16:18:00.000Z",
+  "lastUpdated": "2026-05-09T17:44:33.624834Z",
   "crashDetected": false,
   "interruptedAt": null,
   "tasks": {
@@ -18,20 +18,6 @@
           "Wait for Cramer approval",
           "Send first outreach emails"
         ]
-      },
-      {
-        "title": "Agent Anchor — Add Calendar tab",
-        "meta": "Show task history by date: done, started, cancelled, blocked",
-        "tag": "done",
-        "details": [
-          "Group activity by date from auditLog",
-          "Tag each event: done/started/blocked/cancelled",
-          "Calendar tab ready"
-        ],
-        "actions": [
-          "Start server with API endpoint",
-          "Test Fix Error button"
-        ]
       }
     ],
     "staged": [
@@ -47,250 +33,370 @@
           "OKC Thunder team"
         ],
         "actions": [
-          "Await Cramer go/no-go",
-          "Send first outreach"
+          "Await Cramer go/no-go"
         ]
       },
       {
         "title": "Build My Idea Service",
-        "meta": "$99/build, 3 portfolio pieces",
+        "meta": "$99/build",
         "tag": "waiting",
         "details": [
-          "SweatSync wellness app",
-          "HypeScreen social dashboard",
+          "SweatSync",
+          "HypeScreen",
           "Creator Revenue Calendar"
         ],
         "actions": [
-          "Launch client acquisition",
-          "Send Stripe link to prospects"
+          "Launch client acquisition"
         ]
       },
       {
-        "title": "Agent Anchor — Publish to Claw Mart",
-        "meta": "Cramer loves it · $19 one-time",
+        "title": "Agent Anchor \u2014 Publish to Claw Mart",
+        "meta": "$19 one-time",
         "tag": "waiting",
         "details": [
-          "Needs: Claw Mart seller account + listing"
+          "Live on ClawHub",
+          "Live on metariot.io"
         ],
-        "actions": [
-          "Get seller account",
-          "Create listing"
-        ]
+        "actions": []
       }
     ],
     "completed": [
       {
-        "title": "MetaRiot Command Center built",
-        "meta": "May 8, 12pm",
+        "title": "Agent Anchor \u2014 Dashboard built",
+        "meta": "May 8",
         "tag": "done",
         "details": [
-          "Internal dashboard",
-          "Became Agent Anchor product"
-        ],
-        "actions": []
+          "8 tabs",
+          "crash recovery"
+        ]
       },
       {
-        "title": "Agent Anchor product",
-        "meta": "8 tabs, click-to-expand, Terminal, Cron Jobs",
+        "title": "Agent Anchor \u2014 Landing page",
+        "meta": "May 9",
         "tag": "done",
         "details": [
-          "Tasks/Revenue/Pipeline/Calendar",
-          "Settings/Terminal/Cron Jobs/Snapshot"
-        ],
-        "actions": []
+          "metariot.io/products/agent-anchor"
+        ]
       },
       {
-        "title": "Agent Anchor — Live Dashboard Test",
-        "meta": "Cramer tested · loves it",
+        "title": "Agent Anchor \u2014 ClawHub published",
+        "meta": "May 9",
         "tag": "done",
         "details": [
-          "Dashboard running at http://192.168.1.90:3456",
-          "Cramer: 'I really like the Agent Anchor app'"
-        ],
-        "actions": []
+          "https://clawhub.ai/skills/agent-anchor"
+        ]
       },
       {
-        "title": "Agent Anchor — Cron Click-to-Expand",
-        "meta": "Modal with details + Fix Error button",
+        "title": "Agent Anchor \u2014 GitHub repo",
+        "meta": "May 9",
         "tag": "done",
         "details": [
-          "Click cron job to see details",
-          "Fix Error button triggers cron run",
-          "Works with server API"
-        ],
-        "actions": []
+          "MetaRiot2026/agent-anchor"
+        ]
       }
     ]
   },
-  "revenue": {
-    "actual": 0.99,
-    "blocked": 4800,
-    "pipelineMax": 4900,
-    "streams": [
-      {
-        "name": "Ghost-Operator Newsletter",
-        "price": "$500-1,500/mo",
-        "status": "🔥 FIRE",
-        "statusColor": "status-hot",
-        "potential": "3 prospects · $1,500-4,500/mo"
-      },
-      {
-        "name": "Agent Anchor",
-        "price": "$19 (card) or $19 USDC",
-        "status": "🔴 LIVE — Stripe + Crypto",
-        "statusColor": "status-hot",
-        "potential": "~$57/mo (3 sales)"
-      },
-      {
-        "name": "Agent Anchor Crypto",
-        "price": "$19 USDC",
-        "status": "🔴 LIVE",
-        "statusColor": "status-hot",
-        "potential": "~$19/mo"
-      },
-      {
-        "name": "Build My Idea",
-        "price": "$99/build",
-        "status": "⏸ STAGED",
-        "statusColor": "status-warm",
-        "potential": "~$297/mo (3 builds)"
-      },
-      {
-        "name": "x402 on-chain",
-        "price": "$0.99/payment",
-        "status": "✅ WORKING",
-        "statusColor": "status-done",
-        "potential": "~$10/mo"
-      }
-    ]
-  },
-  "contacts": {
-    "hot": [
-      {
-        "name": "Tyler Walker",
-        "role": "Founder",
-        "company": "Bitcoin Puppets",
-        "notes": "Warm intro path to Chiliz · Eldora Speedway doc connection"
-      }
-    ],
-    "warm": [
-      {
-        "name": "Chiliz team",
-        "role": "Sports blockchain",
-        "company": "Chiliz",
-        "notes": "Via Tyler Walker · Ghost-Operator target"
-      },
-      {
-        "name": "Coinbound",
-        "role": "Crypto content agency",
-        "company": "Coinbound",
-        "notes": "Cold outreach sent · no response yet"
-      }
-    ],
-    "cold": [
-      {
-        "name": "Alicia Jeffreys",
-        "role": "CMO",
-        "company": "Detroit Pistons",
-        "notes": "RSN outreach target"
-      },
-      {
-        "name": "Scott Zachry",
-        "role": "Content Director",
-        "company": "Memphis Grizzlies",
-        "notes": "RSN outreach target"
-      },
-      {
-        "name": "Dawn Turner + Matt Tumbleson",
-        "role": "Digital",
-        "company": "OKC Thunder",
-        "notes": "RSN outreach target"
-      }
-    ]
-  },
-  "auditLog": [
-    { "time": "5/8/2026, 5:40 PM", "action": "Agent Anchor dashboard built — 5 tabs, crash alert, branded", "tag": "started" },
-    { "time": "5/8/2026, 5:42 PM", "action": "State populated with real MetaRiot work context", "tag": "started" },
-    { "time": "5/8/2026, 6:16 PM", "action": "Cron snapshot saved — Agent Anchor dashboard running", "tag": "done" },
-    { "time": "5/8/2026, 6:22 PM", "action": "CRASH TEST: Session interrupted, state saved for recovery", "tag": "cancelled" },
-    { "time": "5/8/2026, 6:23 PM", "action": "Crash recovered - session resumed", "tag": "started" },
-    { "time": "5/9/2026, 10:09 AM", "action": "Cramer: 'I really like the Agent Anchor app we made'", "tag": "done" },
-    { "time": "5/9/2026, 10:12 AM", "action": "State snapshot saved — Agent Anchor marked as FIRE, publish this weekend", "tag": "done" },
-    { "time": "5/9/2026, 10:18 AM", "action": "Added cron job click-to-expand modal — shows details, fix error button", "tag": "done" },
-    { "time": "5/9/2026, 10:25 AM", "action": "Added Calendar tab — shows task history by date", "tag": "done" },
-    { "time": "5/9/2026, 10:30 AM", "action": "Cron auto-snapshot — Agent Anchor features complete", "tag": "done" },
-    { "time": "5/9/2026, 10:30 AM", "action": "Heartbeat: Calendar + Fix Error features live", "tag": "done" },
-    { "time": "5/9/2026, 11:12 AM", "action": "Scheduled snapshot — landing page live at :3458", "tag": "done" },
-    { "time": "5/9/2026, 11:21 AM", "action": "Scheduled snapshot — landing page with real screenshots", "tag": "done" },
-    { "time": "5/9/2026, 11:24 AM", "action": "Scheduled snapshot — payment options discussed with Cramer", "tag": "done" },
-    { "time": "5/9/2026, 11:27 AM", "action": "Cron snapshot saved — Agent Anchor, waiting for Stripe login", "tag": "done" },
-    { "time": "5/9/2026, 11:30 AM", "action": "Cramer shared Stripe dashboard URL — browser session issue", "tag": "blocked" },
-    { "time": "5/9/2026, 11:33 AM", "action": "Scheduled snapshot — Agent Anchor, waiting for Stripe payment link", "tag": "started" },
-    { "time": "5/9/2026, 11:36 AM", "action": "Cron snapshot saved — Agent Anchor, Stripe product in progress", "tag": "done" },
-    { "time": "5/9/2026, 11:38 AM", "action": "Stripe payment link created — https://buy.stripe.com/9B64gs6lWgCE72m4bt63K08", "tag": "done" },
-    { "time": "5/9/2026, 11:39 AM", "action": "Cron snapshot saved — Agent Anchor ready to sell", "tag": "done" },
-    { "time": "5/9/2026, 11:40 AM", "action": "Added crypto payment ($19 USDC) to x402 server", "tag": "done" },
-    { "time": "5/9/2026, 11:42 AM", "action": "Cron snapshot saved — both payment options live", "tag": "done" },
-    { "time": "5/9/2026, 11:46 AM", "action": "Fixed button labels: Stripe (pink) + Crypto (teal)", "tag": "done" },
-    { "time": "5/9/2026, 11:48 AM", "action": "Scheduled snapshot — Agent Anchor fully live", "tag": "done" },
-    { "time": "5/9/2026, 12:06 PM", "action": "Scheduled reminder — state snapshot saved", "tag": "done" },
-    { "time": "5/9/2026, 12:15 PM", "action": "Cron snapshot saved — metariot.io live", "tag": "done" },
-    { "time": "5/9/2026, 12:18 PM", "action": "Scheduled snapshot — MetaRiot site fixes pending", "tag": "done" }
-  ],
-  "snapshotMeta": {
-    "lastSnapshot": "5/9/2026, 10:28 AM",
-    "snapshotCount": 20,
-    "agentName": "Theia",
-    "agentId": "main"
-  },
-  "currentStatus": {
-    "status": "🔥 LIVE",
-    "task": "Agent Anchor — both payments live",
-    "lastHeartbeat": "2026-05-09T16:06:00.000Z",
-    "details": "Agent Anchor LIVE. Stripe + Crypto payments working. Download flow ready."
-  },
-  "systemLog": [
-    { "time": "10:12 AM", "status": "Connected", "message": "Heartbeat snapshot — Cramer likes Agent Anchor, push to publish" },
-    { "time": "10:18 AM", "status": "Connected", "message": "Added cron job modal — click to see details + fix error" },
-    { "time": "10:25 AM", "status": "Connected", "message": "Added Calendar tab — shows task history by date" },
-    { "time": "10:28 AM", "status": "Connected", "message": "State snapshot saved, Fix Error API ready" },
-    { "time": "10:30 AM", "status": "Connected", "message": "Cron auto-snapshot — Agent Anchor features complete" },
-    { "time": "10:39 AM", "status": "Connected", "message": "Distribution planning — landing page, marketing" },
-    { "time": "10:42 AM", "status": "Connected", "message": "Landing page built at agent-anchor/landing.html" },
-    { "time": "10:45 AM", "status": "Connected", "message": "Marketing copy written — ready for distribution" },
-    { "time": "10:48 AM", "status": "Connected", "message": "Cron snapshot saved — Agent Anchor distribution ready" },
-    { "time": "11:12 AM", "status": "Connected", "message": "Scheduled cron snapshot saved" },
-    { "time": "11:21 AM", "status": "Connected", "message": "Scheduled snapshot — landing page with real screenshots live" },
-    { "time": "11:24 AM", "status": "Connected", "message": "Scheduled snapshot — payment options being discussed" },
-    { "time": "11:27 AM", "status": "Connected", "message": "Cron: Agent Anchor snapshot saved, waiting for Stripe login" },
-    { "time": "11:30 AM", "status": "Connected", "message": "Cramer shared Stripe dashboard URL — session not persisting" },
-    { "time": "11:33 AM", "status": "Connected", "message": "Scheduled snapshot saved — waiting for Stripe payment link" },
-    { "time": "11:36 AM", "status": "Connected", "message": "Cron snapshot saved — Agent Anchor, Stripe product being created" },
-    { "time": "11:38 AM", "status": "Connected", "message": "Stripe payment link added to landing page" },
-    { "time": "11:39 AM", "status": "Connected", "message": "Cron auto-snapshot — Agent Anchor ready for sales" },
-    { "time": "11:40 AM", "status": "Connected", "message": "Added crypto payment button to landing page" },
-    { "time": "11:42 AM", "status": "Connected", "message": "Cron: Both payment options live (Stripe + USDC)" },
-    { "time": "11:46 AM", "status": "Connected", "message": "Fixed button colors: Stripe pink, Crypto teal" },
-    { "time": "11:48 AM", "status": "Connected", "message": "Scheduled snapshot — Agent Anchor fully live" },
-    { "time": "12:06 PM", "status": "Connected", "message": "Scheduled reminder — state snapshot saved" },
-    { "time": "12:15 PM", "status": "Connected", "message": "Cron: metariot.io live at https://metariot.io/products/agent-anchor" }
-  ],
   "cronJobs": [
-    { "name": "Agent Anchor Snapshot", "schedule": "*/3 * * *", "status": "ok", "nextRun": "10:30 AM", "lastRun": "10:28 AM", "lastDuration": "4s" },
-    { "name": "Daily Job Leads Research", "schedule": "0 7 * * *", "status": "ok", "nextRun": "7:00 AM Tomorrow", "lastRun": "7:00 AM", "lastDuration": "358s" },
-    { "name": "Daily Production News", "schedule": "30 7 * * *", "status": "ok", "nextRun": "7:30 AM Tomorrow", "lastRun": "7:30 AM", "lastDuration": "192s" },
-    { "name": "Morning Lesson 10am", "schedule": "0 10 * * *", "status": "ok", "nextRun": "Tomorrow 10:00 AM", "lastRun": "10:00 AM", "lastDuration": "240s" },
-    { "name": "Side Hustle School - Afternoon Audit 1pm", "schedule": "0 13 * * *", "status": "error", "nextRun": "1:00 PM", "lastRun": "--", "lastDuration": "279s" },
-    { "name": "Side Hustle School - Evening Verify 4pm", "schedule": "0 16 * * *", "status": "error", "nextRun": "4:00 PM", "lastRun": "--", "lastDuration": "218s" },
-    { "name": "Night Optional 7pm", "schedule": "0 19 * * *", "status": "ok", "nextRun": "7:00 PM", "lastRun": "--", "lastDuration": "248s" }
+    {
+      "name": "Agent Anchor Snapshot",
+      "schedule": "*/3 * * *",
+      "status": "ok",
+      "nextRun": "1:45 PM",
+      "lastRun": "1:42 PM",
+      "lastDuration": "4s"
+    },
+    {
+      "name": "Daily Job Leads Research",
+      "schedule": "0 7 * * *",
+      "status": "ok",
+      "nextRun": "7:00 AM Tomorrow",
+      "lastRun": "7:00 AM",
+      "lastDuration": "358s"
+    },
+    {
+      "name": "Daily Production News",
+      "schedule": "30 7 * * *",
+      "status": "ok",
+      "nextRun": "7:30 AM Tomorrow",
+      "lastRun": "7:30 AM",
+      "lastDuration": "192s"
+    },
+    {
+      "name": "Morning Lesson 10am",
+      "schedule": "0 10 * * *",
+      "status": "ok",
+      "nextRun": "Tomorrow 10:00 AM",
+      "lastRun": "10:00 AM",
+      "lastDuration": "240s"
+    },
+    {
+      "name": "Side Hustle School - Afternoon Audit 1pm",
+      "schedule": "0 13 * * *",
+      "status": "error",
+      "nextRun": "1:00 PM",
+      "lastRun": "--",
+      "lastDuration": "279s"
+    },
+    {
+      "name": "Side Hustle School - Evening Verify 4pm",
+      "schedule": "0 16 * * *",
+      "status": "error",
+      "nextRun": "4:00 PM",
+      "lastRun": "--",
+      "lastDuration": "218s"
+    },
+    {
+      "name": "Night Optional 7pm",
+      "schedule": "0 19 * * *",
+      "status": "ok",
+      "nextRun": "7:00 PM",
+      "lastRun": "--",
+      "lastDuration": "248s"
+    }
   ],
-  "cronJobIds": {
-    "Agent Anchor Snapshot": "d41bf3df-70b7-4e13-bbfe-02680c1c1579",
-    "Side Hustle School - Morning Lesson 10am": "0151a596-83f5-4ab3-a1c3-c318ffea1975",
-    "Side Hustle School - Afternoon Audit 1pm": "993728f5-51b8-491a-94a3-0fd1b5681526",
-    "Side Hustle School - Evening Verify 4pm": "734d3432-de8e-486e-bd1b-45723515d648",
-    "Side Hustle School - Night Optional 7pm": "a56ab1d9-7fa6-4779-907e-0c8cc8607b38",
-    "Daily Job Leads Research": "a6d6ebc6-6f7f-43c0-b278-d319fdc26005",
-    "Daily Production & Geo News": "b5aa0bc4-6227-461d-bd2f-2aa7e88a9184"
+  "auditLog": [
+    {
+      "time": "5/9/2026, 10:09 AM",
+      "action": "Cramer: I really like the Agent Anchor app we made",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 10:12 AM",
+      "action": "State snapshot saved \u2014 publish this weekend",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 10:18 AM",
+      "action": "Added cron job modal \u2014 shows details, fix error button",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 10:25 AM",
+      "action": "Added Calendar tab \u2014 shows task history by date",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 10:39 AM",
+      "action": "Distribution planning \u2014 landing page, marketing",
+      "tag": "started"
+    },
+    {
+      "time": "5/9/2026, 10:42 AM",
+      "action": "Landing page built at agent-anchor/landing.html",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 10:45 AM",
+      "action": "Marketing copy written \u2014 ready",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 10:48 AM",
+      "action": "Distribution ready",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 11:12 AM",
+      "action": "Landing page live",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 11:21 AM",
+      "action": "Screenshots added",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 11:30 AM",
+      "action": "Stripe payment link created",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 11:38 AM",
+      "action": "Both payment options live",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 11:42 AM",
+      "action": "Crypto payment wired",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 11:46 AM",
+      "action": "Button labels fixed",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 11:51 AM",
+      "action": "Agent Anchor fully live",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 12:06 PM",
+      "action": "Reminder: state snapshot",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 12:09 PM",
+      "action": "ClawHub publishing in progress",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 12:12 PM",
+      "action": "MetaRiot site fixes pending",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 12:17 PM",
+      "action": "MetaRiot homepage built",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 12:21 PM",
+      "action": "ClawHub published",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 12:42 PM",
+      "action": "Dashboard connected - tasks loading",
+      "tag": "done"
+    },
+    {
+      "time": "5/9/2026, 1:42 PM",
+      "action": "Cron jobs + calendar added",
+      "tag": "done"
+    }
+  ],
+  "systemLog": [
+    {
+      "time": "10:12 AM",
+      "status": "Connected",
+      "message": "Heartbeat sync"
+    },
+    {
+      "time": "10:18 AM",
+      "status": "Connected",
+      "message": "Heartbeat sync"
+    },
+    {
+      "time": "10:25 AM",
+      "status": "Connected",
+      "message": "Heartbeat sync"
+    },
+    {
+      "time": "10:30 AM",
+      "status": "Connected",
+      "message": "Cron: Auto-snapshot"
+    },
+    {
+      "time": "10:39 AM",
+      "status": "Connected",
+      "message": "Distribution planning"
+    },
+    {
+      "time": "10:42 AM",
+      "status": "Connected",
+      "message": "Landing page built"
+    },
+    {
+      "time": "10:45 AM",
+      "status": "Connected",
+      "message": "Marketing copy written"
+    },
+    {
+      "time": "10:48 AM",
+      "status": "Connected",
+      "message": "Distribution ready"
+    },
+    {
+      "time": "11:00 AM",
+      "status": "Connected",
+      "message": "Scheduled snapshot"
+    },
+    {
+      "time": "11:12 AM",
+      "status": "Connected",
+      "message": "Scheduled snapshot"
+    },
+    {
+      "time": "11:21 AM",
+      "status": "Connected",
+      "message": "Scheduled snapshot"
+    },
+    {
+      "time": "11:30 AM",
+      "status": "Connected",
+      "message": "Scheduled reminder"
+    },
+    {
+      "time": "11:33 AM",
+      "status": "Connected",
+      "message": "Scheduled reminder"
+    },
+    {
+      "time": "11:38 AM",
+      "status": "Connected",
+      "message": "Stripe payment"
+    },
+    {
+      "time": "11:42 AM",
+      "status": "Connected",
+      "message": "Crypto payment wired"
+    },
+    {
+      "time": "11:46 AM",
+      "status": "Connected",
+      "message": "Button labels fixed"
+    },
+    {
+      "time": "11:51 AM",
+      "status": "Connected",
+      "message": "Agent Anchor fully live"
+    },
+    {
+      "time": "12:06 PM",
+      "status": "Connected",
+      "message": "Scheduled reminder"
+    },
+    {
+      "time": "12:09 PM",
+      "status": "Connected",
+      "message": "ClawHub publish"
+    },
+    {
+      "time": "12:12 PM",
+      "status": "Connected",
+      "message": "MetaRiot site fixes"
+    },
+    {
+      "time": "12:17 PM",
+      "status": "Connected",
+      "message": "MetaRiot homepage"
+    },
+    {
+      "time": "12:21 PM",
+      "status": "Connected",
+      "message": "ClawHub published"
+    },
+    {
+      "time": "12:42 PM",
+      "status": "Connected",
+      "message": "Dashboard connected"
+    },
+    {
+      "time": "1:42 PM",
+      "status": "Connected",
+      "message": "Cron jobs + calendar data added"
+    }
+  ],
+  "currentStatus": {
+    "status": "\ud83d\udd25 LIVE",
+    "task": "Agent Anchor \u2014 ALL CHANNELS LIVE",
+    "lastHeartbeat": "2026-05-09T17:44:33.624966Z",
+    "details": "Dashboard connected. Tasks: 1 in progress, 3 staged, 4 done. Cron Jobs: 7 scheduled."
+  },
+  "syncMeta": {
+    "lastSync": "2026-05-09T17:44:33.624968Z",
+    "syncInterval": "3 minutes",
+    "source": "openclawsession"
   }
 }
