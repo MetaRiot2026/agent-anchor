@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Anchor — Dashboard</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d0d0f; color: #e8e8ed; min-height: 100vh; padding: 2rem; }
+:root { --anchor-pink: #ff6b9d; --anchor-teal: #00d4aa; }
+.logo-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
+.logo-header img { width: 56px; height: 56px; border-radius: 12px; }
+header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #2a2a2e; }
+h1 { font-size: 1.5rem; font-weight: 600; color: #fff; }
+.tagline { font-size: 0.875rem; color: #6b6b76; margin-top: 0.25rem; }
+.tab-bar { display: flex; gap: 0.25rem; background: #16161a; border-radius: 10px; padding: 0.3rem; margin-bottom: 1.5rem; border: 1px solid #2a2a2e; max-width: 700px; flex-wrap: wrap; }
+.tab { padding: 0.6rem 1rem; border-radius: 7px; font-size: 0.8rem; font-weight: 500; color: #6b6b76; cursor: pointer; transition: all 0.2s; border: none; background: transparent; }
+.tab:hover { color: #fff; }
+.tab.active { background: #2a2a2e; color: #fff; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.priority-bar { background: linear-gradient(90deg, #1a1a2e 0%, #2a1a3e 100%); border: 1px solid #ff6b9d33; color: #fff; text-align: center; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; font-weight: 500; font-size: 0.875rem; }
+.priority-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: #ff6b9d; display: block; margin-bottom: 0.25rem; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
+.column-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
+.column-icon { font-size: 1rem; }
+.column-title { font-size: 0.875rem; font-weight: 600; color: #fff; }
+h2 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6b76; margin-bottom: 0.75rem; }
+.card { background: #1e1e24; border-radius: 8px; padding: 0.875rem; margin-bottom: 0.75rem; border: 1px solid #2a2a2e; }
+.card:hover { border-color: var(--anchor-pink); cursor: pointer; }
+.card-title { font-size: 0.875rem; font-weight: 500; color: #fff; margin-bottom: 0.25rem; }
+.card-meta { font-size: 0.75rem; color: #6b6b76; line-height: 1.5; }
+.tag { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.65rem; font-weight: 500; text-transform: uppercase; }
+.tag-fire { background: #2d1f1f; color: #ff6b9d; }
+.tag-active { background: #1f2a2a; color: #00d4aa; }
+.tag-waiting { background: #2a2a1f; color: #d4a72c; }
+.tag-done { background: #1f2a1f; color: #888; }
+.footer { text-align: center; font-size: 0.75rem; color: #6b6b76; padding-top: 2rem; border-top: 1px solid #2a2a2e; margin-top: 2rem; }
+.footer img { width: 32px; height: 32px; vertical-align: middle; margin-right: 0.5rem; border-radius: 8px; }
+.crash-alert { display: none; background: #2d1f1f; border: 1px solid #ff6b4a; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+.crash-alert.visible { display: block; }
+.crash-alert-title { font-size: 0.875rem; font-weight: 600; color: #ff6b4a; margin-bottom: 0.25rem; }
+.crash-alert-meta { font-size: 0.75rem; color: #6b6b76; }
+.terminal-window { background: #0a0a0c; border: 1px solid #2a2a2e; border-radius: 8px; overflow: hidden; }
+.terminal-header { background: #16161a; padding: 0.5rem 1rem; display: flex; justify-content: space-between; font-size: 0.75rem; color: #6b6b76; border-bottom: 1px solid #2a2a2e; }
+.terminal-output { max-height: 250px; overflow-y: auto; padding: 1rem; font-family: monospace; font-size: 0.75rem; }
+.term-line { padding: 0.25rem 0; border-bottom: 1px solid #1a1a1e; }
+.term-time { color: #6b6b76; margin-right: 0.5rem; }
+.term-line.Connected { color: #00d4aa; }
+#connectionStatus { color: #00d4aa; font-weight: 600; }
+#connectionStatus.disconnected { color: #ff6b4a; }
+#taskModal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 1000; padding: 2rem; overflow-y: auto; }
+#jobModal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 1000; padding: 2rem; overflow-y: auto; }
+.job-modal-content { background: #1e1e24; max-width: 500px; margin: 10% auto; padding: 1.5rem; border-radius: 12px; border: 1px solid #00d4aa; }
+.job-modal-content h2 { font-size: 1.25rem; color: #fff; margin-bottom: 0.5rem; }
+.job-modal-meta { color: #6b6b76; font-size: 0.8rem; margin-bottom: 1rem; }
+.job-detail-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #2a2a2e; font-size: 0.85rem; }
+.job-detail-row:last-of-type { border-bottom: none; }
+.job-detail-label { color: #6b6b76; }
+.job-detail-value { color: #fff; font-weight: 500; }
+.job-detail-value.error { color: #ff6b4a; }
+.job-detail-value.ok { color: #00d4aa; }
+.job-error-info { background: #2d1f1f; border: 1px solid #ff6b4a; border-radius: 6px; padding: 1rem; margin-top: 1rem; color: #ff6b4a; font-size: 0.85rem; }
+.job-fix-btn { background: #00d4aa; color: #000; border: none; border-radius: 6px; padding: 0.6rem 1.2rem; font-weight: 600; cursor: pointer; margin-top: 1rem; font-size: 0.85rem; }
+.job-fix-btn:hover { background: #00f5c4; }
+.job-fix-btn:disabled { background: #666; cursor: not-allowed; }
+.calendar-list { margin-top: 1rem; }
+.calendar-day { margin-bottom: 1.5rem; }
+.calendar-date { font-size: 0.8rem; font-weight: 600; color: #ff6b9d; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.calendar-event { display: flex; gap: 0.5rem; padding: 0.5rem 0; border-bottom: 1px solid #1e1e24; font-size: 0.75rem; }
+.calendar-event:last-child { border-bottom: none; }
+.calendar-time { color: #6b6b76; min-width: 70px; }
+.calendar-action { color: #fff; }
+.calendar-tag { font-size: 0.6rem; padding: 0.1rem 0.4rem; border-radius: 3px; margin-left: auto; }
+.calendar-tag.done { background: #1f2a1f; color: #888; }
+.calendar-tag.started { background: #1f2a2a; color: #00d4aa; }
+.calendar-tag.blocked { background: #2a2a1f; color: #d4a72c; }
+.calendar-tag.cancelled { background: #2d1f1f; color: #ff6b4a; }
+#taskModal.visible { display: block; }
+.modal-content { background: #1e1e24; max-width: 600px; margin: 10% auto; padding: 1.5rem; border-radius: 12px; border: 1px solid #ff6b9d; }
+.modal-content h2 { font-size: 1.25rem; color: #fff; margin-bottom: 1rem; }
+.modal-meta { color: #aaa; margin-bottom: 1rem; line-height: 1.6; font-size: 0.9rem; }
+.modal-details { color: #666; font-size: 0.85rem; line-height: 1.8; }
+.modal-details ul { margin: 0.5rem 0; padding-left: 1.2rem; }
+.modal-details li { margin-bottom: 0.25rem; }
+.modal-actions { color: #00d4aa; margin-top: 1rem; font-size: 0.85rem; }
+.modal-actions div { margin-bottom: 0.25rem; }
+.modal-close { margin-top: 1.5rem; padding: 0.6rem 1.5rem; background: #ff6b9d; color: #000; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="logo-header">
+<img src="logo.png" alt="Agent Anchor">
+<div><h1>Agent Anchor</h1><div class="tagline">Your agent's memory. Survives everything.</div></div>
+</div>
+<header><div class="last-updated">Last updated: <span id="lastUpdated">--</span></div></header>
+
+<div class="crash-alert" id="crashAlert"><div class="crash-alert-title">⚠️ Crash Detected</div><div class="crash-alert-meta" id="crashMeta">Session interrupted</div></div>
+
+<div class="tab-bar">
+<button class="tab active" onclick="switchTab('tasks')">Tasks</button>
+<button class="tab" onclick="switchTab('terminal')">Terminal</button>
+<button class="tab" onclick="switchTab('jobs')">Cron Jobs</button>
+<button class="tab" onclick="switchTab('calendar')">Calendar</button>
+<button class="tab" onclick="switchTab('snapshot')">Snapshot</button>
+</div>
+
+<!-- TASKS TAB -->
+<div id="tasks" class="tab-content active">
+<div class="priority-bar"><span class="priority-label">🔥 Do Next</span><span id="topPriority">No active tasks</span></div>
+<div class="grid">
+<div class="column"><div class="column-header"><span class="column-icon">🔄</span><span class="column-title">In Progress</span></div><h2>ACTIVE</h2><div id="inProgress"></div></div>
+<div class="column"><div class="column-header"><span class="column-icon">⏸️</span><span class="column-title">Staged</span></div><h2>BLOCKED</h2><div id="staged"></div></div>
+<div class="column"><div class="column-header"><span class="column-icon">✅</span><span class="column-title">Done</span></div><h2>COMPLETED</h2><div id="completed"></div></div>
+</div>
+</div>
+
+<!-- TERMINAL TAB -->
+<div id="terminal" class="tab-content">
+<div class="priority-bar"><span class="priority-label">📟 System Log</span><span id="connectionStatus">● Connected</span></div>
+<div class="terminal-window">
+<div class="terminal-header"><span>OpenClaw Status</span><span id="lastHeartbeat">--</span></div>
+<div class="terminal-output" id="terminalOutput"></div>
+</div>
+<div class="grid" style="margin-top:1rem;">
+<div class="column"><div class="card"><div class="card-title">Last Backup</div><div class="card-meta" id="lastBackupTime">--</div></div></div>
+<div class="column"><div class="card"><div class="card-title">Status</div><div class="card-meta" id="connStatusText">Connected</div></div></div>
+<div class="column"><div class="card"><div class="card-title">Agent Task</div><div class="card-meta" id="agentTask">--</div></div></div>
+</div>
+</div>
+
+<!-- JOBS TAB -->
+<div id="jobs" class="tab-content">
+<div class="priority-bar"><span class="priority-label">📋 Cron Jobs</span><span id="jobsCount">Loading...</span></div>
+<div id="jobsList"></div>
+</div>
+
+<!-- CALENDAR TAB -->
+<div id="calendar" class="tab-content">
+<div class="priority-bar"><span class="priority-label">📅 Activity Calendar</span><span id="calendarRange">Last 30 days</span></div>
+<div id="calendarList" class="calendar-list"></div>
+</div>
+
+<!-- SNAPSHOT TAB -->
+<div id="snapshot" class="tab-content">
+<div class="card"><div class="card-title">Raw State JSON</div><div class="card-meta" id="rawState">Loading...</div></div>
+</div>
+
+<div class="footer"><img src="logo.png"> Agent Anchor v1.0</div>
+
+<!-- TASK MODAL -->
+<div id="taskModal">
+<div class="modal-content">
+<h2 id="modalTitle"></h2>
+<div id="modalMeta" class="modal-meta"></div>
+<div id="modalDetails" class="modal-details"></div>
+<div id="modalActions" class="modal-actions"></div>
+<button class="modal-close" onclick="closeModal()">Close</button>
+</div>
+</div>
+
+<!-- JOB MODAL -->
+<div id="jobModal">
+<div class="job-modal-content">
+<h2 id="jobModalTitle"></h2>
+<div id="jobModalMeta" class="job-modal-meta"></div>
+<div id="jobModalDetails"></div>
+<div id="jobErrorInfo" class="job-error-info" style="display:none"></div>
+<button id="jobFixBtn" class="job-fix-btn" style="display:none" onclick="fixJobError()">Fix Error</button>
+<button class="modal-close" onclick="closeJobModal()">Close</button>
+</div>
+</div>
+
+<script>
+var state = {};
+var systemLog = [];
+
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.tab-content').forEach(function(c){ c.classList.remove('active'); });
+  document.getElementById(name).classList.add('active');
+  document.querySelectorAll('.tab').forEach(function(btn){ if(btn.getAttribute('onclick').indexOf(name)>=0) btn.classList.add('active'); });
+}
+
+function openTaskModal(title, meta, details, actions, tag) {
+  document.getElementById('modalTitle').innerHTML = title + (tag?' <span class="tag '+(tag==='fire'?'tag-fire':(tag==='waiting'?'tag-waiting':'tag-active'))+'">'+tag+'</span>':'');
+  document.getElementById('modalMeta').innerText = meta || '';
+  var dhtml = details ? '<ul>'+details.split('||').map(function(d){return '<li>'+d+'</li>'}).join('')+'</ul>' : '<p>No additional details</p>';
+  document.getElementById('modalDetails').innerHTML = dhtml;
+  var ahtml = actions ? actions.split('||').map(function(a){return '<div>- '+a+'</div>'}).join('') : '<div>No actions</div>';
+  document.getElementById('modalActions').innerHTML = '<strong>Actions:</strong><br>'+ahtml;
+  document.getElementById('taskModal').classList.add('visible');
+}
+
+function closeModal() {
+  document.getElementById('taskModal').classList.remove('visible');
+}
+
+function buildCards(items) {
+  if(!items||!items.length) return '<div class="card"><div class="card-meta">No items</div></div>';
+  return items.map(function(i){
+    var d = i.details ? i.details.join('||') : '';
+    var a = i.actions ? i.actions.join('||') : '';
+    var t = i.title || 'Untitled';
+    var m = i.meta || '';
+    var g = i.tag || 'active';
+    return '<div class="card" data-t="'+t+'" data-m="'+m+'" data-d="'+d+'" data-a="'+a+'" data-g="'+g+'" onclick="openTaskModal(this.dataset.t, this.dataset.m, this.dataset.d, this.dataset.a, this.dataset.g)" style="cursor:pointer"><span class="tag '+(g==='fire'?'tag-fire':(g==='waiting'?'tag-waiting':(g==='done'?'tag-done':'tag-active')))+'">'+g+'</span><div class="card-title" style="margin-top:0.5rem">'+t+'</div><div class="card-meta">'+m+'</div></div>';
+  }).join('');
+}
+
+var currentJobName = '';
+function displayJobs(jobs) {
+  var list = document.getElementById("jobsList");
+  if(!list) return;
+  document.getElementById("jobsCount").textContent = jobs.length + " scheduled";
+  list.innerHTML = jobs.map(function(j){
+    var status = j.status === "ok" ? "tag-active" : "tag-fire";
+    var label = j.status === "ok" ? "OK" : "ERROR";
+    return '<div class="card" onclick="openJobModal(\''+j.name+'\',\''+j.schedule+'\',\''+j.status+'\',\''+j.lastRun+'\',\''+j.lastDuration+'\',\''+j.nextRun+'\')" style="cursor:pointer"><span class="tag '+status+'">'+label+'</span><div class="card-title" style="margin-top:0.5rem">'+j.name+'</div><div class="card-meta">'+j.schedule+' | Next: '+j.nextRun+' | Last: '+j.lastRun+' ('+j.lastDuration+')</div></div>';
+  }).join("");
+}
+
+function openJobModal(name, schedule, status, lastRun, lastDuration, nextRun) {
+  currentJobName = name;
+  document.getElementById('jobModalTitle').textContent = name;
+  document.getElementById('jobModalMeta').textContent = 'Schedule: ' + schedule;
+  var statusClass = status === 'ok' ? 'ok' : 'error';
+  var statusText = status === 'ok' ? '✅ OK' : '❌ ERROR';
+  document.getElementById('jobModalDetails').innerHTML = '<div class="job-detail-row"><span class="job-detail-label">Status</span><span class="job-detail-value '+statusClass+'">'+statusText+'</span></div><div class="job-detail-row"><span class="job-detail-label">Last Run</span><span class="job-detail-value">'+lastRun+'</span></div><div class="job-detail-row"><span class="job-detail-label">Duration</span><span class="job-detail-value">'+lastDuration+'</span></div><div class="job-detail-row"><span class="job-detail-label">Next Run</span><span class="job-detail-value">'+nextRun+'</span></div>';
+  var errorInfo = document.getElementById('jobErrorInfo');
+  var fixBtn = document.getElementById('jobFixBtn');
+  if(status !== 'ok') {
+    errorInfo.style.display = 'block';
+    errorInfo.textContent = 'This job has an error. Click "Fix Error" to retry.';
+    fixBtn.style.display = 'inline-block';
+  } else {
+    errorInfo.style.display = 'none';
+    fixBtn.style.display = 'none';
+  }
+  document.getElementById('jobModal').style.display = 'block';
+}
+
+function closeJobModal() {
+  document.getElementById('jobModal').style.display = 'none';
+}
+
+function displayCalendar() {
+  var list = document.getElementById('calendarList');
+  if(!list) return;
+  var log = state.auditLog || [];
+  if(!log.length) {
+    list.innerHTML = '<div class="card"><div class="card-meta">No activity recorded yet</div></div>';
+    return;
+  }
+  // Group by date
+  var byDate = {};
+  log.forEach(function(e) {
+    var date = e.time.split(',')[0];
+    if(!byDate[date]) byDate[date] = [];
+    byDate[date].push(e);
+  });
+  // Render grouped
+  var html = Object.keys(byDate).sort().reverse().map(function(date) {
+    var events = byDate[date].map(function(e) {
+      var tag = 'started';
+      if(e.action && e.action.toLowerCase().indexOf('complete') >= 0) tag = 'done';
+      else if(e.action && e.action.toLowerCase().indexOf('cancel') >= 0) tag = 'cancelled';
+      else if(e.action && (e.action.toLowerCase().indexOf('block') >= 0 || e.action.toLowerCase().indexOf('wait') >= 0)) tag = 'blocked';
+      return '<div class="calendar-event"><span class="calendar-time">'+e.time.split(',')[1].trim()+'</span><span class="calendar-action">'+e.action+'</span><span class="calendar-tag '+tag+'">'+tag+'</span></div>';
+    }).join('');
+    return '<div class="calendar-day"><div class="calendar-date">'+date+'</div>'+events+'</div>';
+  }).join('');
+  list.innerHTML = html;
+}
+
+function fixJobError() {
+  var btn = document.getElementById('jobFixBtn');
+  btn.textContent = 'Retrying...';
+  btn.disabled = true;
+  var jobId = state.cronJobIds ? state.cronJobIds[currentJobName] : null;
+  if(!jobId) {
+    alert('No cron ID found for: ' + currentJobName + '. Run: openclaw cron run <job-id>');
+    btn.textContent = 'Fix Error';
+    btn.disabled = false;
+    return;
+  }
+  fetch('/api/run-cron', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({jobId: jobId})}).then(function(r){return r.json();}).then(function(data){
+    if(data.success) {
+      alert('Job re-run triggered! Check status in a few seconds.');
+    } else {
+      alert('Error: ' + data.error);
+    }
+    btn.textContent = 'Fix Error';
+    btn.disabled = false;
+  }).catch(function(e){
+    alert('Failed to trigger: ' + e.message);
+    btn.textContent = 'Fix Error';
+    btn.disabled = false;
+  });
+}
+
+function updateTerminal() {
+  var out = document.getElementById("terminalOutput");
+  if(!out) return;
+  var logs = (state.systemLog || systemLog).slice(-10).reverse();
+  out.innerHTML = logs.map(function(e){ return '<div class="term-line Connected"><span class="term-time">['+e.time+']</span> ● '+e.message+'</div>'; }).join('') || '<div class="term-line Connected"><span class="term-time">[--]</span> Waiting...</div>';
+  
+  if(state.currentStatus) {
+    document.getElementById('connectionStatus').textContent = state.currentStatus.status + ' ' + state.currentStatus.task;
+    document.getElementById('agentTask').textContent = state.currentStatus.details || '';
+    document.getElementById('connStatusText').textContent = state.currentStatus.status;
+    document.getElementById('lastHeartbeat').textContent = new Date(state.currentStatus.lastHeartbeat).toLocaleTimeString();
+  } else {
+    document.getElementById('connectionStatus').textContent = '● Connected';
+    document.getElementById('lastHeartbeat').textContent = new Date().toLocaleTimeString();
+  }
+  
+  if(state.lastUpdated) {
+    document.getElementById('lastBackupTime').textContent = new Date(state.lastUpdated).toLocaleTimeString();
+  }
+}
+
+function render() {
+  document.getElementById('lastUpdated').textContent = state.lastUpdated ? new Date(state.lastUpdated).toLocaleString() : '--';
+  if(state.crashDetected) {
+    document.getElementById('crashAlert').classList.add('visible');
+    document.getElementById('crashMeta').textContent = 'Interrupted at: ' + (state.interruptedAt || 'unknown');
+  }
+  var tasks = state.tasks || {};
+  document.getElementById('topPriority').textContent = (tasks.inProgress && tasks.inProgress[0]) ? tasks.inProgress[0].title : 'No active tasks';
+  document.getElementById('inProgress').innerHTML = buildCards(tasks.inProgress);
+  document.getElementById('staged').innerHTML = buildCards(tasks.staged);
+  document.getElementById('completed').innerHTML = buildCards(tasks.completed);
+  document.getElementById('rawState').textContent = state ? JSON.stringify(state, null, 2).substring(0, 2000) + '...' : 'No state';
+  updateTerminal();
+  if(state.cronJobs) displayJobs(state.cronJobs);
+  displayCalendar();
+}
+
+function loadState() {
+  fetch('state-anchor.json').then(function(r){return r.json();}).then(function(loaded){
+    state = loaded;
+    systemLog = state.systemLog || [];
+    render();
+  }).catch(function(e){
+    console.log('Load error', e);
+    render();
+  });
+}
+
+loadState();
+setInterval(loadState, 10000);
+</script>
+</body>
+</html>
